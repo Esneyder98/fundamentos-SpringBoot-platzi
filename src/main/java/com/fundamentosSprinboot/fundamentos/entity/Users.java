@@ -1,5 +1,6 @@
 package com.fundamentosSprinboot.fundamentos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -22,7 +23,8 @@ public class Users {
     @Column(name = "birthDate")
     private LocalDate birthDate;
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    //@JsonManagedReference
+    @JsonIgnore
     private List<Post> post = new ArrayList<>();
 
     public Users() {
@@ -32,6 +34,10 @@ public class Users {
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
+    }
+
+    public Users(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
